@@ -156,17 +156,17 @@ const CAR_REQUEST_URL = {
     `${BAIDU_BASE_API}staticimage/v2?ak=${ak}&center=${longitude},${latitude}&width=${size.width}&height=${size.height}&zoom=15&copyright=1`,
   
   // 更新文件
-  UpdateVersionURL: "https://gitee.com/GhostClock/gc-camry-ios/raw/master/version.json",
+  UpdateVersionURL: "https://gitee.com/0312birdzhang/GC-Levin-iOS/raw/master/version.json",
   // 手机抓包教程
   CaptureData: 'https://www.cnblogs.com/hong-fithing/p/12562448.html',
   // 打赏作者
-  ActionDonation: 'https://gitee.com/GhostClock/gc-camry-ios/tree/master#6%E6%89%93%E8%B5%8F',
+  ActionDonation: 'https://gitee.com/GhostClock/GC-Levin-iOS/tree/master#6%E6%89%93%E8%B5%8F',
   // 背景图片
   BackgroundImage: "http://img1.tcdachun.com/180519/330808-1P51Z9454738.jpg",
   // 无数据背景图
   EmptyDataImage: "https://carappvideo.gtmc.com.cn//fs01//IFImage//carnetImage//img-819-PT-ZZB-089.png",
   // 丰田Icon  logo_black:黑色图标 logo_white:白色图标
-  ToyotaIconImage: "https://gitee.com/GhostClock/gc-camry-ios/raw/master/resource/logo_black.PNG",
+  ToyotaIconImage: "https://gitee.com/GhostClock/GC-Levin-iOS/raw/master/resource/logo_black.PNG",
 }
 // ------请求URL结束------
 
@@ -249,7 +249,7 @@ class Base {
   }
   // 得到车架号
   getVINInfo() {
-    var _vinInfo = {vin: "", vhcGradeCode: ""}
+    var _vinInfo = {vin: "", vhcGradeCode: "", modelCode: ""}
     if (Keychain.contains(CONST_DATA.VinInfoKey)) {
       let vinInfo = Keychain.get(CONST_DATA.VinInfoKey)
       _vinInfo = JSON.parse(vinInfo)
@@ -616,8 +616,8 @@ class Widget extends Base {
   constructor(arg) {
     super(arg)
     this.styleType = arg
-    this.name = '凯美瑞 小组件'
-    this.desc = '丰田凯美瑞 车辆桌面组件展示'
+    this.name = '雷凌 小组件'
+    this.desc = '丰田雷凌 车辆桌面组件展示'
 
     this.cookie = `${this.userInfo.cookie}`
     this.userId = `${this.userInfo.userId}`
@@ -694,7 +694,7 @@ class Widget extends Base {
     var titleStack = bgStack.addStack()
     titleStack.layoutHorizontally()
     // titleStack.backgroundColor = Color.blue()
-    let title = titleStack.addText(`CAMRY ${data.vhcGradeCode}`)
+    let title = titleStack.addText(`${data.modelCode} ${data.vhcGradeCode}`)
     title.lineLimit = 1
     title.font = Font.italicSystemFont(20)
     title.textColor = Color.black()
@@ -759,7 +759,7 @@ class Widget extends Base {
 
     // 可以在这里定制化你自己想要的Title,建议不要太长，因为可能显示不下 
     // 例如：`凯美瑞 ${data.vhcGradeCode} 豪华版(${data.registNo})` registNo为车牌号，
-    let titleString = `CAMRY ${data.vhcGradeCode}`
+    let titleString = `${data.modelCode} ${data.vhcGradeCode}`
     let title = textContentStack.addText(titleString)
     title.font = Font.boldSystemFont(20) // 这里可以修改字体，默认为斜体,想改为斜体的话：italicSystemFontboldSystemFont(21)
     title.textColor = Color.black()
@@ -928,21 +928,13 @@ class Widget extends Base {
     var alert = new Alert()
     alert.title = "登录数据"
     alert.addTextField("请粘贴您抓取的数据", "")
-    let _ak = this.userInfo.ak
-    let showAKTextField = _ak.length == 0
-    if (showAKTextField) {
-      // 本地没有保存的百度AK
-      alert.addTextField("请输入百度地图的AK", "")
-    }
+    let _ak = "pIBUtiKSYqZwn91GhIWDu4cqR3P1qO3W" // 丰云行中抓包的AK
     alert.addAction("确定")
     alert.addCancelAction("取消")
     const id = await alert.presentAlert()
     if (id === -1) return
     let userInfo = alert.textFieldValue(0)
-    if (showAKTextField) {
-      // 本地没有保存的百度AK
-      _ak = alert.textFieldValue(1)
-    }
+    
     try {
       let jsonData = JSON.parse(userInfo)
       // 解析数据
@@ -987,6 +979,7 @@ class Widget extends Base {
       errMsg: "",
       resultCode: "", // resultCode != 1 || resultCode != 200的时候errMsg有数据信息
       vhcGradeCode: "", // 汽车型号
+      modelCode: "", // 汽车名称
       refreshDate: this.getRefreshDate() //刷新时间
     }
     // 1.必须先获取车架号 -> 经测试这个接口特别容易失败，所以做缓存处理
@@ -994,6 +987,7 @@ class Widget extends Base {
     let vinInfo = this.getVINInfo()
     let vin = vinInfo.vin
     let vhcGradeCode = vinInfo.vhcGradeCode
+    let modelCode = vinInfo.modelCode
     log(vinInfo)
     if (vin.length == 0) {
       log("本地无车架号和车型，开始请求车架号和车型")
@@ -1007,11 +1001,12 @@ class Widget extends Base {
       }
       vin = _vinInfo.vin
       vhcGradeCode = _vinInfo.vhcGradeCode
-
-      this.setVINInfo({vin: vin, vhcGradeCode: vhcGradeCode})
+      modelCode = _vinInfo.modelCode
+      this.setVINInfo({vin: vin, vhcGradeCode: vhcGradeCode, modelCode: modelCode})
     } 
     carInfoData.vin = vin
     carInfoData.vhcGradeCode = vhcGradeCode
+    carInfoData.modelCode = modelCode
     this.debugLog(`车架号: ${carInfoData.vin}`)
 
     // 2.获取汽车位置
@@ -1074,8 +1069,9 @@ class Widget extends Base {
     let row = jsonData.data.rows[0]
     let _vin = row.vin
     let _vhcGradeCode = row.vhcGradeCode
-    _vhcGradeCode = _vhcGradeCode.split(" ")[1]
-    return {resultCode: resultCode, errMsg: errMsg,  vin: _vin, vhcGradeCode: _vhcGradeCode}
+    let _modelCode = row.modelCode
+    _vhcGradeCode = _vhcGradeCode.split(" ")[1] || _vhcGradeCode.split("@")[1]
+    return {resultCode: resultCode, errMsg: errMsg,  vin: _vin, vhcGradeCode: _vhcGradeCode, modelCode: _modelCode}
   }
 
   // 获取汽车经纬度信息 -> 地理反编码
@@ -1184,7 +1180,7 @@ class Widget extends Base {
   // 检查更新
   async actionCheckUpdate() {
     log(123)
-    let UPDATE_FILE = 'GC-Camry-iOS.js'
+    let UPDATE_FILE = 'GC-Levin-iOS.js'
     let FILE_MGR = FileManager[module.filename.includes('Documents/iCloud~') ? 'iCloud' : 'local']()
     let url = CAR_REQUEST_URL.UpdateVersionURL
     let response = await this.GetRequest(url, CONST_DATA.ContentTypeJson) 
