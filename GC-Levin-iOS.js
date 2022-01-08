@@ -160,13 +160,13 @@ const CAR_REQUEST_URL = {
   // 手机抓包教程
   CaptureData: 'https://www.cnblogs.com/hong-fithing/p/12562448.html',
   // 打赏作者
-  ActionDonation: 'https://gitee.com/GhostClock/GC-Levin-iOS/tree/master#6%E6%89%93%E8%B5%8F',
+  ActionDonation: 'https://gitee.com/GhostClock/gc-camry-ios/tree/master#6%E6%89%93%E8%B5%8F',
   // 背景图片
   BackgroundImage: "http://img1.tcdachun.com/180519/330808-1P51Z9454738.jpg",
   // 无数据背景图
   EmptyDataImage: "https://carappvideo.gtmc.com.cn//fs01//IFImage//carnetImage//img-819-PT-ZZB-089.png",
   // 丰田Icon  logo_black:黑色图标 logo_white:白色图标
-  ToyotaIconImage: "https://gitee.com/GhostClock/GC-Levin-iOS/raw/master/resource/logo_black.PNG",
+  ToyotaIconImage: "https://gitee.com/GhostClock/gc-camry-ios/raw/master/resource/logo_black.PNG",
 }
 // ------请求URL结束------
 
