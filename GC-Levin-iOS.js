@@ -1216,7 +1216,7 @@ class Widget extends Base {
     let url = CAR_REQUEST_URL.UpdateVersionURL
     let response = await this.GetRequest(url, CONST_DATA.ContentTypeJson) 
     console.log(`远程版本：${response.version}`)
-    if (response?.version === CONST_DATA.CurrentVersion) return this.notify('无需更新', '远程版本一致，暂无更新')
+    if (response.version === CONST_DATA.CurrentVersion) return this.notify('无需更新', '远程版本一致，暂无更新')
     log('发现新的版本')
     let logInfo = response.changelog.join('\n')
     log(logInfo)
