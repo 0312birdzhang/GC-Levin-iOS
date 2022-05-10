@@ -166,7 +166,7 @@ const CAR_REQUEST_URL = {
   // 无数据背景图
   EmptyDataImage: "https://carappvideo.gtmc.com.cn//fs01//IFImage//carnetImage//img-819-PT-ZZB-089.png",
   // 丰田Icon  logo_black:黑色图标 logo_white:白色图标
-  ToyotaIconImage: "https://gitee.com/0312birdzhang/GC-Levin-iOS/raw/master/resource/logo_black.png",
+  ToyotaIconImage: "https://gitee.com/0312birdzhang/GC-Levin-iOS/raw/master/resource/logo_black.PNG",
 }
 // ------请求URL结束------
 
