@@ -13,7 +13,7 @@ const CONST_DATA = {
   // 车架号信息
   VinInfoKey: "VIN_INFO_KEY",
   // 当前版本号
-  CurrentVersion: "1.3.3",
+  CurrentVersion: "1.3.4",
   // ContentType
   ContentTypeUrlencoded: "application/x-www-form-urlencoded",
   ContentTypeJson: "application/json",
@@ -1013,6 +1013,7 @@ class Widget extends Base {
     let vin = vinInfo.vin
     let vhcGradeCode = vinInfo.vhcGradeCode
     let modelCode = vinInfo.modelCode
+    let carNickname = vinInfo.carNickname
     log(vinInfo)
     if (vin.length == 0) {
       log("本地无车架号和车型，开始请求车架号和车型")
