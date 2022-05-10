@@ -5,7 +5,7 @@
 // ------静态数据------
 const CONST_DATA = {
   // App版本
-  AppVersion: "4.18.0",
+  AppVersion: "4.23.0",
   // UserAgent
   UserAgent: `GTMC_CarOwner_Yonyou/${this.AppVersion} (iPhone; iOS 15.2; Scale/3.00)Accept-Language: zh-Hans-CN;q=1, en-CN;q=0.9`,
   // CookieKey
@@ -13,7 +13,7 @@ const CONST_DATA = {
   // 车架号信息
   VinInfoKey: "VIN_INFO_KEY",
   // 当前版本号
-  CurrentVersion: "1.3.2",
+  CurrentVersion: "1.3.3",
   // ContentType
   ContentTypeUrlencoded: "application/x-www-form-urlencoded",
   ContentTypeJson: "application/json",
@@ -249,7 +249,7 @@ class Base {
   }
   // 得到车架号
   getVINInfo() {
-    var _vinInfo = {vin: "", vhcGradeCode: "", modelCode: ""}
+    var _vinInfo = {vin: "", vhcGradeCode: "", modelCode: "", carNickname: ""}
     if (Keychain.contains(CONST_DATA.VinInfoKey)) {
       let vinInfo = Keychain.get(CONST_DATA.VinInfoKey)
       _vinInfo = JSON.parse(vinInfo)
@@ -694,7 +694,12 @@ class Widget extends Base {
     var titleStack = bgStack.addStack()
     titleStack.layoutHorizontally()
     // titleStack.backgroundColor = Color.blue()
-    let title = titleStack.addText(`${data.modelCode} ${data.vhcGradeCode}`)
+    let carNickname = `${data.carNickname}`
+    let titleString = `${data.modelCode} ${data.vhcGradeCode}`
+    if(carNickname){
+      titleString = `${data.carNickname}`
+    }
+    let title = textContentStack.addText(titleString)
     title.lineLimit = 1
     title.font = Font.italicSystemFont(20)
     title.textColor = Color.black()
@@ -765,7 +770,11 @@ class Widget extends Base {
 
     // 可以在这里定制化你自己想要的Title,建议不要太长，因为可能显示不下 
     // 例如：`凯美瑞 ${data.vhcGradeCode} 豪华版(${data.registNo})` registNo为车牌号，
+    let carNickname = `${data.carNickname}`
     let titleString = `${data.modelCode} ${data.vhcGradeCode}`
+    if(carNickname){
+      titleString = `${data.carNickname}`
+    }
     let title = textContentStack.addText(titleString)
     title.font = Font.boldSystemFont(19) // 这里可以修改字体，默认为粗体(boldSystemFont),想改为斜体(italicSystemFont)
     title.textColor = Color.black()
@@ -993,6 +1002,7 @@ class Widget extends Base {
       resultCode: "", // resultCode != 1 || resultCode != 200的时候errMsg有数据信息
       vhcGradeCode: "", // 汽车型号
       modelCode: "", // 汽车名称
+      carNickname: "", // 昵称
       fuelWearAvg: "", //加满油油耗
       fuelFilledWearAvg: "", //当前油耗
       refreshDate: this.getRefreshDate() //刷新时间
@@ -1017,11 +1027,13 @@ class Widget extends Base {
       vin = _vinInfo.vin
       vhcGradeCode = _vinInfo.vhcGradeCode
       modelCode = _vinInfo.modelCode
-      this.setVINInfo({vin: vin, vhcGradeCode: vhcGradeCode, modelCode: modelCode})
+      carNickname = _vinInfo.carNickname
+      this.setVINInfo({vin: vin, vhcGradeCode: vhcGradeCode, modelCode: modelCode, carNickname: carNickname})
     } 
     carInfoData.vin = vin
     carInfoData.vhcGradeCode = vhcGradeCode
     carInfoData.modelCode = modelCode
+    carInfoData.carNickname = carNickname
     this.debugLog(`车架号: ${carInfoData.vin}`)
 
     // 2.获取汽车位置
@@ -1087,8 +1099,9 @@ class Widget extends Base {
     let _vin = row.vin
     let _vhcGradeCode = row.vhcGradeCode
     let _modelCode = row.modelCode
+    let _carNickname = row.carNickname
     _vhcGradeCode = _vhcGradeCode.split(" ")[1] || _vhcGradeCode.split("@")[1]
-    return {resultCode: resultCode, errMsg: errMsg,  vin: _vin, vhcGradeCode: _vhcGradeCode, modelCode: _modelCode}
+    return {resultCode: resultCode, errMsg: errMsg,  vin: _vin, vhcGradeCode: _vhcGradeCode, modelCode: _modelCode, carNickname: _carNickname}
   }
 
   // 获取汽车经纬度信息 -> 地理反编码
