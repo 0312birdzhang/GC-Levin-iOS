@@ -93,7 +93,7 @@ Stream抓包使用方法请看(这里是教你怎么用Stream，和我们的目�
 ## 3.下载js文件
 
 点击这里安装 
-[<img src="https://scriptdu.de/download.svg" width="120" />](https://scriptdu.de/?name=Levin小组件&source=https://gitee.com/0312birdzhang/GC-Levin-iOS/raw/master/GC-Levin-iOS.js&docs=https://gitee.com/0312birdzhang/GC-Levin-iOS#0%E9%87%8D%E8%A6%81%E8%AF%B4%E6%98%8E)
+[<img src="https://scriptdu.de/download.svg" width="120" />](https://scriptdu.de/?name=Levin小组件&source=https://github.com/0312birdzhang/GC-Levin-iOS/raw/master/GC-Levin-iOS.js&docs=https://github.com/0312birdzhang/GC-Levin-iOS#0%E9%87%8D%E8%A6%81%E8%AF%B4%E6%98%8E)
 
 
 

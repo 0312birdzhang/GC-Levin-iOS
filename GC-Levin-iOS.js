@@ -156,17 +156,17 @@ const CAR_REQUEST_URL = {
     `${BAIDU_BASE_API}staticimage/v2?ak=${ak}&center=${longitude},${latitude}&width=${size.width}&height=${size.height}&zoom=15&copyright=1`,
   
   // 更新文件
-  UpdateVersionURL: "https://gitee.com/0312birdzhang/GC-Levin-iOS/raw/master/version.json",
+  UpdateVersionURL: "https://github.com/0312birdzhang/GC-Levin-iOS/raw/master/version.json",
   // 手机抓包教程
   CaptureData: 'https://www.cnblogs.com/hong-fithing/p/12562448.html',
   // 打赏作者
-  ActionDonation: 'https://gitee.com/GhostClock/gc-camry-ios/tree/master#6%E6%89%93%E8%B5%8F',
+  ActionDonation: 'https://github.com/GhostClock/gc-camry-ios/tree/master#6%E6%89%93%E8%B5%8F',
   // 背景图片
   BackgroundImage: "http://img1.tcdachun.com/180519/330808-1P51Z9454738.jpg",
   // 无数据背景图
   EmptyDataImage: "https://carappvideo.gtmc.com.cn//fs01//IFImage//carnetImage//img-819-PT-ZZB-089.png",
   // 丰田Icon  logo_black:黑色图标 logo_white:白色图标
-  ToyotaIconImage: "https://gitee.com/0312birdzhang/GC-Levin-iOS/raw/master/resource/logo_black.PNG",
+  ToyotaIconImage: "https://github.com/0312birdzhang/GC-Levin-iOS/raw/master/resource/logo_black.png",
 }
 // ------请求URL结束------
 
@@ -1022,7 +1022,7 @@ class Widget extends Base {
       carInfoData.resultCode = _vinInfo.resultCode
       carInfoData.errMsg = _vinInfo.errMsg
       if (_vinInfo.resultCode != '1') {
-        this.cookitInvalid(_vinInfo.errMsg)
+        // this.cookitInvalid(_vinInfo.errMsg)
         return vinInfo
       }
       vin = _vinInfo.vin
@@ -1042,7 +1042,7 @@ class Widget extends Base {
     carInfoData.resultCode = positionData.resultCode
     carInfoData.errMsg = positionData.errMsg
     if (positionData.resultCode != 200) {
-      this.cookitInvalid(positionData.errMsg)
+      // this.cookitInvalid(positionData.errMsg)
       return positionData
     }
 
