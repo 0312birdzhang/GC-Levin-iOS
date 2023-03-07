@@ -1,8 +1,9 @@
 {
 	"inherit": true,
-	"version": "1.3.6",
+	"version": "1.3.7",
 	"download": "https://github.com/0312birdzhang/gc-levin-ios/raw/master/GC-Camry-iOS.js",
 	"changelog": [
-		"1.版本号更新"
+		"1.更新默认图片为雷凌的",
+		"2.更新丰云行版本号"
 	]
 }

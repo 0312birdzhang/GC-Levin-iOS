@@ -5,7 +5,7 @@
 // ------静态数据------
 const CONST_DATA = {
   // App版本
-  AppVersion: "5.4.0",
+  AppVersion: "5.8.2",
   // UserAgent
   UserAgent: `GTMC_CarOwner_Yonyou/${this.AppVersion} (iPhone; iOS 15.2; Scale/3.00)Accept-Language: zh-Hans-CN;q=1, en-CN;q=0.9`,
   // CookieKey
@@ -13,7 +13,7 @@ const CONST_DATA = {
   // 车架号信息
   VinInfoKey: "VIN_INFO_KEY",
   // 当前版本号
-  CurrentVersion: "1.3.6",
+  CurrentVersion: "1.3.7",
   // ContentType
   ContentTypeUrlencoded: "application/x-www-form-urlencoded",
   ContentTypeJson: "application/json",
@@ -164,7 +164,7 @@ const CAR_REQUEST_URL = {
   // 背景图片
   BackgroundImage: "http://img1.tcdachun.com/180519/330808-1P51Z9454738.jpg",
   // 无数据背景图
-  EmptyDataImage: "https://carappvideo.gtmc.com.cn//fs01//IFImage//carnetImage//img-819-PT-ZZB-089.png",
+  EmptyDataImage: "https://carappvideo.gtmc.com.cn/fs01/IFImage/carnetImage/imgs-618-089-040.png",
   // 丰田Icon  logo_black:黑色图标 logo_white:白色图标
   ToyotaIconImage: "https://github.com/0312birdzhang/GC-Levin-iOS/raw/master/resource/logo_black.PNG",
 }
