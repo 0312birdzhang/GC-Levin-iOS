@@ -13,7 +13,7 @@ const CONST_DATA = {
   // 车架号信息
   VinInfoKey: "VIN_INFO_KEY",
   // 当前版本号
-  CurrentVersion: "1.3.7",
+  CurrentVersion: "1.3.8",
   // ContentType
   ContentTypeUrlencoded: "application/x-www-form-urlencoded",
   ContentTypeJson: "application/json",
@@ -960,9 +960,9 @@ class Widget extends Base {
     try {
       let jsonData = JSON.parse(userInfo)
       // 解析数据
-      let _cookie = jsonData["data"]["jwt"]
-      let _userId = jsonData["data"]["rData"]["userId"]
-      let _phone = jsonData["data"]["rData"]["telPhone"]
+      let _cookie = jsonData["body"]["jwt"]
+      let _userId = jsonData["body"]["rData"]["userId"]
+      let _phone = jsonData["body"]["rData"]["telPhone"]
       // 本地保存数据
       let cacheUserInfo = {cookie: _cookie, userId: _userId, phone: _phone, ak: _ak}
       this.setUserInfo(cacheUserInfo)
