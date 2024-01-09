@@ -5,7 +5,7 @@
 // ------静态数据------
 const CONST_DATA = {
   // App版本
-  AppVersion: "5.8.2",
+  AppVersion: "6.4.0",
   // UserAgent
   UserAgent: `GTMC_CarOwner_Yonyou/${this.AppVersion} (iPhone; iOS 15.2; Scale/3.00)Accept-Language: zh-Hans-CN;q=1, en-CN;q=0.9`,
   // CookieKey
@@ -13,7 +13,7 @@ const CONST_DATA = {
   // 车架号信息
   VinInfoKey: "VIN_INFO_KEY",
   // 当前版本号
-  CurrentVersion: "1.3.8",
+  CurrentVersion: "1.3.9",
   // ContentType
   ContentTypeUrlencoded: "application/x-www-form-urlencoded",
   ContentTypeJson: "application/json",
@@ -534,7 +534,7 @@ class Base {
     let notif = new Notification()
     notif.title = title
     notif.body = body
-    notif.sound = "accept"
+    notif.sound = "event"
     return await notif.schedule()
   }
   // 给图片加一层半透明遮罩
@@ -988,7 +988,7 @@ class Widget extends Base {
   async NetworkingAction(cookie, userId, phone, ak) {
     var carInfoData = {
       address: "", // 地址
-      registNo: "", // 地址
+      registNo: "", // 车牌号
       vhcName: "",  // 名称
       modelImage: "", // 图片
       mileageTotal: "", // 总行程数
@@ -1031,6 +1031,10 @@ class Widget extends Base {
       carNickname = _vinInfo.carNickname
       this.setVINInfo({vin: vin, vhcGradeCode: vhcGradeCode, modelCode: modelCode, carNickname: carNickname})
     } 
+    // 混动车型，把V改成G
+    if (vhcGradeCode.search("V") != -1) {
+      vhcGradeCode = vhcGradeCode.replaceAll("V", "G")
+    }
     carInfoData.vin = vin
     carInfoData.vhcGradeCode = vhcGradeCode
     carInfoData.modelCode = modelCode
